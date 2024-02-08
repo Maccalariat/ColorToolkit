@@ -1,0 +1,36 @@
+TODO list for the project.
+
+Component:
+Global - attempt to exploit use of parallel processing toolbox. Ensure that
+         useage is invoked only if installed.
+
+ColorToolboxPanal.mlapp
+
+GamutCompare.mlapp
+
+ImageColorPlot.mlapp
+
+ImageDeltaE.mlapp
+
+ImagePointCloud.mlapp
+
+ProfileInformation.mlapp
+    Add in CIELab reference triangle:
+        opened gamut RGB reference overlayed with Adobe, sRGB
+        Pointer's gamut an optional extra
+
+myColorCloud function:
+    improve performance
+
+generatePointersGamut.m
+    figure out how I want this to function: produce and image and in what
+    colorspace.
+    This should be an alternative for the reference gamut.
+    Where can I get an authoritative profile/data set of this?
+
+generateReferenceGamut.m
+    Possibly refactor this and generatePointersGamut.m to produce the
+    'reference' gamut of choice:
+    a) all colors with variable saturation
+    b) Pointer's gamut
+    c) a macbeth/colorchecker. Only useful if it has a lot of swatches.
