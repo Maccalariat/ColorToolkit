@@ -13,4 +13,4 @@ In that process I decided to take a more 'use-case' user interface and workflow 
 
 In order to use this code base, you require a legal (of course) version of modern Matlab (I used Matlab 2023) and the Image Processing Toolbox.
 
-
+The entry-point for the application is the script "CTB.m" in the root directory.
