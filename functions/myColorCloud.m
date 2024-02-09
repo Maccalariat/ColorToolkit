@@ -1,11 +1,11 @@
-function myColorCloud(inputImage, colorspace, parent)
+function myColorCloud(inImage, colorspace, parent)
     % myColorCloud produce a color cloud plot
     %    output  = (not via return) scatter3
     %    input: inputImage - the input image array. Must be 3D RGB
     %           colorspace - the colorspace of inputImage
     %           parent - the parent of the scatter3 plot.
 
-    inputImage = im2double(inputImage);
+    inputImage = im2double(inImage);
     % Convert RGB data into specified colorspace
     if isicc(colorspace)
     	try
@@ -42,8 +42,12 @@ function myColorCloud(inputImage, colorspace, parent)
 
     if x*3 > 2e6
         sampleFactor = round(numPixels/targetNumPoints);
-        uniqueColors = uniqueColors(1:sampleFactor:end,:);
-        cm = cm(1:sampleFactor:end,:);
+		idx = false(x, 1);
+        idx(1:sampleFactor:end) = true;
+        uniqueColors = uniqueColors(idx,:);
+        cm = cm(idx,:);
+        % uniqueColors = uniqueColors(1:sampleFactor:end,:);
+        % cm = cm(1:sampleFactor:end,:);
     end
     
     scatter3(parent,uniqueColors(:,2),uniqueColors(:,3),uniqueColors(:,1),6,cm,'.');
