@@ -1,4 +1,4 @@
-function myColorCloud(inImage, colorspace, parent)
+function colorPoints =  myColorCloud(inImage, colorspace, parent)
     % myColorCloud produce a color cloud plot
     %    output  = (not via return) scatter3
     %    input: inputImage - the input image array. Must be 3D RGB
@@ -33,22 +33,19 @@ function myColorCloud(inImage, colorspace, parent)
 	% get unique colors
 	uniqueColors = unique(colorData,'rows');
 	cm = lab2rgb(uniqueColors);
-	[x,~] = size(uniqueColors);
+	[colorPoints,~] = size(uniqueColors);
 
     % Downsample to 2e6 points if image is large to keep number of points in
     % scatter plot manageable
-    targetNumPoints = 2e6;
-    numPixels = x;
+    % targetNumPoints = 2e6;
+    % numPixels = x;
 
-    if x*3 > 2e6
-        sampleFactor = round(numPixels/targetNumPoints);
-		idx = false(x, 1);
-        idx(1:sampleFactor:end) = true;
-        uniqueColors = uniqueColors(idx,:);
-        cm = cm(idx,:);
-        % uniqueColors = uniqueColors(1:sampleFactor:end,:);
-        % cm = cm(1:sampleFactor:end,:);
-    end
+    % if x*3 > 2e6
+    %     sampleFactor = round(numPixels/targetNumPoints);
+	% 	idx = false(x, 1);
+    %     idx(1:sampleFactor:end) = true;
+    %     uniqueColors = uniqueColors(idx,:);
+    % end
     
     scatter3(parent,uniqueColors(:,2),uniqueColors(:,3),uniqueColors(:,1),6,cm,'.');
 end
