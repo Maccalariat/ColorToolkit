@@ -11,7 +11,7 @@ whitePointText = 'non standard';
 
 if colorspace == "Lab"
     % convert the values to XYZ
-    x, y, z = Lab2xyz(x, y, z);
+    x; y; z = Lab2xyz(x, y, z);
 end
 
 % Iterate over each standard whitepoint
