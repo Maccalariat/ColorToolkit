@@ -28,10 +28,10 @@ function colorPoints =  myColorCloud(inImage, colorspace, parent)
     end
 
     [m,n,~] = size(colorData);
-    colorData = reshape(colorData,[m*n 3]);
+    gpuColorData = gpuArray(reshape(colorData,[m*n 3]));
 
 	% get unique colors
-	uniqueColors = unique(colorData,'rows');
+	uniqueColors = gather(unique(gpuColorData,'rows'));
 	cm = lab2rgb(uniqueColors);
 	[colorPoints,~] = size(uniqueColors);
 
