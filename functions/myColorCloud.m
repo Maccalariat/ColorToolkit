@@ -7,6 +7,13 @@ function colorPoints =  myColorCloud(inImage, colorspace, parent)
 
 	inputImage = double(zeros(size(inImage)));
 
+    [m,n,~] = size(colorData);
+    gpuColorData = gpuArray(reshape(colorData,[m*n 3]));
+
+	% get unique colors
+	uniqueColors = gather(unique(gpuColorData,'rows'));
+	cm = lab2rgb(uniqueColors);
+    
 	inputImage = im2double(inImage);
 
 	% Convert RGB data into specified colorspace
@@ -38,6 +45,7 @@ function colorPoints =  myColorCloud(inImage, colorspace, parent)
 		UcolorData = reshape(colorData,[m*n 3]);
 		uniqueColors = unique(UcolorData,'rows');
 	end
+>>>>>>> da192bc4d25e509caae4321c6567c7a7b747b0eb
 	[colorPoints,~] = size(uniqueColors);
 	cm = lab2rgb(uniqueColors);
 	scatter3(parent,uniqueColors(:,2),uniqueColors(:,3),uniqueColors(:,1),6,cm,'.');
