@@ -58,12 +58,12 @@ kH = 1;
 De00 = ((DLP./kL./SL).^2+(DCP./kC./SC).^2+(DHP./kH./SH).^2+(RT.*(DCP./kC./SC).*(DHP./kH./SH))).^(1/2);
 
 % ------------- define a few convenient subfunctions -------------
-function out = atan2Deg(inY,inX);
+function out = atan2Deg(inY,inX)
 out = atan2(inY,inX).*180./pi;
 out = out+(out<0).*360;
 
-function out = sinDeg(in);
+function out = sinDeg(in)
 out = sin(in.*pi./180);
 
-function out = cosDeg(in);
+function out = cosDeg(in)
 out = cos(in.*pi./180);
