@@ -34,3 +34,7 @@ codegen/
 
 # custom matlab
 /resources/
+/profile_results/
+/testdata/
+/UIComponents/
+
