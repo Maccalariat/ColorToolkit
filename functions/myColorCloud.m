@@ -5,6 +5,7 @@ function colorPoints =  myColorCloud(inImage, colorspace, parent)
 	%           colorspace - the colorspace of inputImage
 	%           parent - the parent of the scatter3 plot.
 
+    % pre-allocate the image buffer
 	inputImage = double(zeros(size(inImage)));
 
     [m,n,~] = size(colorData);
@@ -44,8 +45,7 @@ function colorPoints =  myColorCloud(inImage, colorspace, parent)
 	else
 		UcolorData = reshape(colorData,[m*n 3]);
 		uniqueColors = unique(UcolorData,'rows');
-	end
->>>>>>> da192bc4d25e509caae4321c6567c7a7b747b0eb
+    end
 	[colorPoints,~] = size(uniqueColors);
 	cm = lab2rgb(uniqueColors);
 	scatter3(parent,uniqueColors(:,2),uniqueColors(:,3),uniqueColors(:,1),6,cm,'.');
