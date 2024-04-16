@@ -1,6 +1,6 @@
-function [returnFromImage, returnToImage, transform] = createPCSTransform(iccProfileFrom, iccProfileTo, renderingIntent, image)
-    %CREATEPCSTRANSFORM Create an icc transform to the profiles PCS and return a
-    % Lab version (if PCS is XYZ)
+function [returnFromImage, returnToImage, transform] = createP2PTransform(iccProfileFrom, iccProfileTo, sourceRI, destRI, image)
+    %CREATEPCSTRANSFORM Create an icc transform to the destination profiles space
+    % and returns a Lab version (if PCS is XYZ)
     %   with the supplied iccProfile and image create an icc profile to
     %   transform to the profiles pcs. if the pcs is Lab, ok. if the pcs id XYZ
     %   then convert to Lab.
@@ -9,26 +9,16 @@ function [returnFromImage, returnToImage, transform] = createPCSTransform(iccPro
     % that clut is likely more accurate that matrrc. <shrugs/>
     % return both the transform and the transformed image.
 
-    if ~isicc(iccProfile) 
-        return;
-    end
+    % create the PCS representation of the image in the iccProfileForm PCS
+    returnFromImage = createPCSTransform(iccProfileFrom, image);
 
-    try
-        % AToB3 device->PCS, Absolute Colorimetric
-        transform = makecform("clut", iccProfile,"AToB3");
-    catch
-        try
-            transform = makecform("mattrc", iccProfile, Direction="forward", RenderingIntent="AbsoluteColorimetric");
-        catch
-        end
-    end
-    returnImage = applycform(image,transform);
-    switch iccProfile.Header.ConnectionSpace
-        case "XYZ"
-            returnImage = xyz2lab(returnImage);
-        case "Lab"
-        otherwise
-            disp(["unknown pcs ... " pcs]);
-    end
+    % make a transform between iccProfileFrom and iccProfileTo using the
+    % supplied renderingIntent
+    transform = makecform("icc", iccProfileFrom, iccProfileTo, SourceRenderingIntent=sourceRI, DestRenderingIntent=destRI);
+
+    transformedToImage = applycform(image,transform);
+    
+    returnToImage = createPCSTransform(iccProfileTo, transformedToImage);
+
 end
 
