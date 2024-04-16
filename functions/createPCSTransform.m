@@ -22,7 +22,7 @@ function [returnImage, transform] = createPCSTransform(iccProfile, image)
         catch
         end
     end
-    returnImage = applycform(image,transform);
+    returnImage = double(applycform(image,transform));
     switch iccProfile.Header.ConnectionSpace
         case "XYZ"
             returnImage = xyz2lab(returnImage);
