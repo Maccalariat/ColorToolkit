@@ -8,8 +8,12 @@ function colorPoints =  myColorCloud(inImage, colorspace, parent)
     % pre-allocate the image buffer
 	inputImage = double(zeros(size(inImage)));
 
-    [m,n,~] = size(colorData);
-    gpuColorData = gpuArray(reshape(colorData,[m*n 3]));
+        % Convert RGB data into specified colorspace
+    [returnImage, transform] = createPCSTransform(colorspace, inImage);
+
+
+    [m,n,~] = size(returnImage);
+    gpuColorData = gpuArray(reshape(returnImage,[m*n 3]));
 
 	% get unique colors
 	uniqueColors = gather(unique(gpuColorData,'rows'));
