@@ -15,4 +15,6 @@ In order to use this code base, you require a legal (of course) version of moder
 
 The entry-point for the application is the script "CTB.m" in the root directory.
 
+This is a very-much-work-in-progress endeavour. As I learn, I am updating this.
+
 Enjoy.
