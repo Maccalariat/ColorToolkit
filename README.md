@@ -11,7 +11,7 @@ Originally, my plan was to 'modernize' the Gamutvision codebase to use Matlab 20
 I quickly realized that even with Matlab utilities to convert the codebase, the challenge exceed a complete re-write.
 In that process I decided to take a more 'use-case' user interface and workflow approach.
 
-In order to use this code base, you require a legal (of course) version of modern Matlab (I used Matlab 2023) and the Image Processing and Parallel Processing Toolboxes.
+In order to use this code base, you require a legal (of course) version of modern Matlab (I used Matlab 2024) and the Image Processing and Parallel Processing Toolboxes.
 I have tried to fence the use of the Parallel Processing toolbox so if you don't have it, it should still work.
 
 The entry-point for the application is the script "CTB.m" in the root directory.
