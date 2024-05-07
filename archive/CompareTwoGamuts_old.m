@@ -1,4 +1,4 @@
-function CompareTwoGamuts
+function CompareTwoGamuts_old
     % COMPARETWOGAMUTS compare two gamuts
     %
     % Rread in two icc profiles and able compare them in 3D renders.

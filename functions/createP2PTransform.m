@@ -1,4 +1,4 @@
-function [returnFromImage, returnToImage, transform] = createP2PTransform(iccProfileFrom, iccProfileTo, sourceRI, destRI, image)
+function [outputImage, returnToImage, transform] = createP2PTransform(iccProfileFrom, iccProfileTo, sourceRI, destRI, inputImage)
     %CREATEPCSTRANSFORM Create an icc transform to the destination profiles space
     % and returns a Lab version (if PCS is XYZ)
     %   with the supplied iccProfile and image create an icc profile to
@@ -10,7 +10,7 @@ function [returnFromImage, returnToImage, transform] = createP2PTransform(iccPro
     % return both the transform and the transformed image.
 
     % create the PCS representation of the image in the iccProfileForm PCS
-    returnFromImage = createPCSTransform(iccProfileFrom, image);
+    returnToImage = createPCSTransform(iccProfileFrom, inputImage, sourceRI);
 
     % make a transform between iccProfileFrom and iccProfileTo using the
     % supplied renderingIntent
@@ -18,7 +18,8 @@ function [returnFromImage, returnToImage, transform] = createP2PTransform(iccPro
 
     transformedToImage = applycform(image,transform);
     
-    returnToImage = createPCSTransform(iccProfileTo, transformedToImage);
+	% now re-render the image to the PCS/Lab colorspace
+    outputImage = iccTransformToPCS(iccProfileTo, transformedToImage);
 
 end
 
